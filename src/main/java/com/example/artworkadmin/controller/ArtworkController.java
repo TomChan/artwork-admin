@@ -45,8 +45,8 @@ public class ArtworkController {
     }
 
     @GetMapping("/api/v1.0/artworks/searchType")
-    public List<Artwork> getArtworkByKey(@RequestParam String type, @RequestParam String field) {
-        return artworkService.findByKey(type.toLowerCase(), field);
+    public List<Artwork> getArtworkByKey(@RequestParam String type, @RequestParam String field, @RequestParam Boolean filterImage) {
+        return artworkService.findByKey(type.toLowerCase(), field, filterImage);
     }
 
     @DeleteMapping("/api/v1.0/artworks/{id}")

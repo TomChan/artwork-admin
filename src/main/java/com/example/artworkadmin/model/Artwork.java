@@ -8,17 +8,14 @@ public class Artwork {
 
     public static final String ART_NAME_KEY = "artname";
     public static final String ARTIST_NAME_KEY = "artistname";
-    public static final String ARTIST_INFO_KEY = "artistinfo";
+    public static final String ART_CAT_KEY = "artcat";
     public static final String COLOR_KEY = "color";
-    public static final String COLOR_LIST_KEY = "colorlist";
     public static final String MEDIUM_KEY = "medium";
-    public static final String MEDIUM_LIST_KEY = "mediumlist";
     public static final String CULTURE_KEY = "culture";
-    public static final String CULTURE_LIST_KEY = "culturelist";
     public static final String BRG_KEY = "brg";
     public static final String CATEGORY_KEY = "category";
-    public static final String CATEGORY_LIST_KEY = "categorylist";
-    public static final String DESCRIPTION_KEY = "discription";
+    public static final String CREATION_YEAR_KEY = "creationyear";
+    public static final String ACQUISTION_YEAR_KEY = "acquistionyear";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
