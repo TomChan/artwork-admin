@@ -260,4 +260,36 @@ public class Artwork {
     public void setId(long id) {
         this.id = id;
     }
+
+    public Artwork() {
+
+    }
+
+    public Artwork(long id, String artName, String artCat, List<String> artCatList, String artistName, String artistInfo, String creationDate, String creationMonth, String creationYear, String acquistionDate, String acquistionMonth, String acquistionYear, String color, List<String> colorList, String medium, List<String> mediumList, String culture, List<String> cultureList, String brg, String category, List<String> categorylist, String displayImage, String imgLoc, String soundLoc, String description) {
+        this.id = id;
+        this.artName = artName;
+        this.artCat = artCat;
+        this.artCatList = artCatList;
+        this.artistName = artistName;
+        this.artistInfo = artistInfo;
+        this.creationDate = creationDate;
+        this.creationMonth = creationMonth;
+        this.creationYear = creationYear;
+        this.acquistionDate = acquistionDate;
+        this.acquistionMonth = acquistionMonth;
+        this.acquistionYear = acquistionYear;
+        this.color = color;
+        this.colorList = colorList;
+        this.medium = medium;
+        this.mediumList = mediumList;
+        this.culture = culture;
+        this.cultureList = cultureList;
+        this.brg = brg;
+        this.category = category;
+        this.categorylist = categorylist;
+        this.displayImage = displayImage;
+        this.imgLoc = imgLoc;
+        this.soundLoc = soundLoc;
+        this.description = description;
+    }
 }

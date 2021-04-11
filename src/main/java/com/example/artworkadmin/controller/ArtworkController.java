@@ -3,10 +3,15 @@ package com.example.artworkadmin.controller;
 import com.example.artworkadmin.exporter.ArtworkExcelExporter;
 import com.example.artworkadmin.model.Artwork;
 import com.example.artworkadmin.service.ArtworkService;
+import com.example.artworkadmin.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -53,6 +58,32 @@ public class ArtworkController {
     public Long deleteArtworkById(@PathVariable Long id) {
         artworkService.deleteById(id);
         return id;
+    }
+
+    @PostMapping("/api/v1.0/artworks/upload/csv")
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        try {
+            List<Artwork> artworks = FileUtil.parseCsvFile(file.getInputStream());
+            artworks.forEach(artwork -> artworkService.save(artwork));
+            return ResponseEntity.status(HttpStatus.OK).body("");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error in uploading csv");
+        }
+    }
+
+    @GetMapping("/api/v1.0/artworks/export/csv")
+    public void exportToCsv(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = ((SimpleDateFormat) dateFormatter).format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Artwork> listUsers = artworkService.findAll();
+
+        FileUtil.exportToCsv(response.getWriter(), listUsers);
     }
 
     @GetMapping("/api/v1.0/artworks/export/excel")
