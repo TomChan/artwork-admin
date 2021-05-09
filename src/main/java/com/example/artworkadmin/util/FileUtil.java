@@ -19,16 +19,11 @@ public class FileUtil {
 
     static {
         HEADERS.add("ID");
-        HEADERS.add("ArtName");
-        HEADERS.add("ArtCat");
-        HEADERS.add("ArtCatList");
+        HEADERS.add("ArtTitle");
+        HEADERS.add("ArtLoc");
         HEADERS.add("ArtistName");
         HEADERS.add("ArtistInfo");
-        HEADERS.add("CreationDate");
-        HEADERS.add("CreationMonth");
         HEADERS.add("CreationYear");
-        HEADERS.add("AcquistionDate");
-        HEADERS.add("AcquistionMonth");
         HEADERS.add("AcquistionYear");
         HEADERS.add("Color");
         HEADERS.add("ColorList");
@@ -62,16 +57,11 @@ public class FileUtil {
             for (Artwork artwork : customers) {
                 List<String> data = Arrays.asList(
                         String.valueOf(artwork.getId()),
-                        artwork.getArtName(),
-                        artwork.getArtCat(),
-                        convertList(artwork.getArtCatList()),
+                        artwork.getArtTitle(),
+                        artwork.getArtLoc(),
                         artwork.getArtistName(),
                         artwork.getArtistInfo(),
-                        artwork.getCreationDate(),
-                        artwork.getCreationMonth(),
                         artwork.getCreationYear(),
-                        artwork.getAcquistionDate(),
-                        artwork.getAcquistionMonth(),
                         artwork.getAcquistionYear(),
                         artwork.getColor(),
                         convertList(artwork.getColorList()),
@@ -113,16 +103,11 @@ public class FileUtil {
             for (CSVRecord csvRecord : csvRecords) {
                 Artwork artwork = new Artwork(
                         Long.parseLong(csvRecord.get("ID")),
-                        csvRecord.get("ArtName"),
-                        csvRecord.get("ArtCat"),
-                        parseList(csvRecord.get("ArtCatList")),
+                        csvRecord.get("ArtTitle"),
+                        csvRecord.get("ArtLoc"),
                         csvRecord.get("ArtistName"),
                         csvRecord.get("ArtistInfo"),
-                        csvRecord.get("CreationDate"),
-                        csvRecord.get("CreationMonth"),
                         csvRecord.get("CreationYear"),
-                        csvRecord.get("AcquistionDate"),
-                        csvRecord.get("AcquistionMonth"),
                         csvRecord.get("AcquistionYear"),
                         csvRecord.get("Color"),
                         parseList(csvRecord.get("ColorList")),

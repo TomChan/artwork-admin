@@ -9,5 +9,5 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "artwork", path = "artwork")
 public interface ArtworkRepository extends CrudRepository<Artwork, Long> {
-    List<Artwork> findByArtName(@Param("name") String name);
+    List<Artwork> findByArtTitle(@Param("name") String name);
 }

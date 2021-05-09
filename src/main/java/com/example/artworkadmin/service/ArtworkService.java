@@ -2,9 +2,14 @@ package com.example.artworkadmin.service;
 
 import com.example.artworkadmin.model.Artwork;
 import com.example.artworkadmin.repo.ArtworkRepository;
+
+import com.example.artworkadmin.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +19,8 @@ import java.util.Optional;
 public class ArtworkService {
     @Autowired
     private ArtworkRepository artworkRepository;
+    @Autowired
+    private Environment env;
 
     public List<Artwork> findAll() {
         Iterable<Artwork> it = artworkRepository.findAll();
@@ -31,11 +38,18 @@ public class ArtworkService {
 
     public Artwork save(final Artwork artwork) {
         Artwork a = artworkRepository.save(artwork);
+        String filename = env.getProperty("artwork.persist.location");
+        try {
+            FileWriter fw = new FileWriter(filename);
+            FileUtil.exportToCsv(fw, this.findAll());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return a;
     }
 
     public Artwork findByName(final String name) {
-        Iterable<Artwork> it = artworkRepository.findByArtName(name);
+        Iterable<Artwork> it = artworkRepository.findByArtTitle(name);
         Iterator<Artwork> iterator = it.iterator();
 
         return iterator.hasNext() ? iterator.next() : null;
@@ -60,8 +74,8 @@ public class ArtworkService {
             String sourceValue = null;
             List<String> sourceListValue = null;
             switch (key) {
-                case Artwork.ART_NAME_KEY:
-                    sourceValue = artwork.getArtName();
+                case Artwork.ART_TITLE_KEY:
+                    sourceValue = artwork.getArtTitle();
                     break;
                 case Artwork.ARTIST_NAME_KEY:
                     sourceValue = artwork.getArtistName();
@@ -87,8 +101,8 @@ public class ArtworkService {
                 case Artwork.CREATION_YEAR_KEY:
                     sourceValue = artwork.getCreationYear();
                     break;
-                case Artwork.ART_CAT_KEY:
-                    sourceListValue = artwork.getArtCatList();
+                case Artwork.ART_LOC_KEY:
+                    sourceValue = artwork.getArtLoc();
                     break;
             }
 

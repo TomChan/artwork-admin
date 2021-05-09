@@ -1,14 +1,17 @@
 package com.example.artworkadmin.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Artwork {
 
-    public static final String ART_NAME_KEY = "artname";
+    public static final String ART_TITLE_KEY = "arttitle";
     public static final String ARTIST_NAME_KEY = "artistname";
-    public static final String ART_CAT_KEY = "artcat";
+    public static final String ART_LOC_KEY = "artloc";
     public static final String COLOR_KEY = "color";
     public static final String MEDIUM_KEY = "medium";
     public static final String CULTURE_KEY = "culture";
@@ -21,68 +24,57 @@ public class Artwork {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String artName;
-    private String artCat;
+    private String artTitle;
+    private String artLoc;
 
-    @Column
-    @ElementCollection(targetClass=String.class)
-    private List<String> artCatList;
     private String artistName;
     private String artistInfo;
-    private String creationDate;
-    private String creationMonth;
     private String creationYear;
-    private String acquistionDate;
-    private String acquistionMonth;
     private String acquistionYear;
     private String color;
 
     @Column
-    @ElementCollection(targetClass=String.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ElementCollection(targetClass = String.class)
     private List<String> colorList;
     private String medium;
 
     @Column
-    @ElementCollection(targetClass=String.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ElementCollection(targetClass = String.class)
     private List<String> mediumList;
     private String culture;
 
     @Column
-    @ElementCollection(targetClass=String.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ElementCollection(targetClass = String.class)
     private List<String> cultureList;
     private String brg;
     private String category;
 
     @Column
-    @ElementCollection(targetClass=String.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ElementCollection(targetClass = String.class)
     private List<String> categorylist;
     private String displayImage;
     private String imgLoc;
     private String soundLoc;
     private String description;
 
-    public String getArtName() {
-        return artName;
+    public String getArtTitle() {
+        return artTitle;
     }
 
-    public void setArtName(String artName) {
-        this.artName = artName;
+    public void setArtTitle(String artTitle) {
+        this.artTitle = artTitle;
     }
 
-    public String getArtCat() {
-        return artCat;
+    public String getArtLoc() {
+        return artLoc;
     }
 
-    public void setArtCat(String artCat) {
-        this.artCat = artCat;
-    }
-
-    public List<String> getArtCatList() {
-        return artCatList;
-    }
-
-    public void setArtCatList(List<String> artCatList) {
-        this.artCatList = artCatList;
+    public void setArtLoc(String artLoc) {
+        this.artLoc = artLoc;
     }
 
     public String getArtistName() {
@@ -101,44 +93,12 @@ public class Artwork {
         this.artistInfo = artistInfo;
     }
 
-    public String getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public String getCreationMonth() {
-        return creationMonth;
-    }
-
-    public void setCreationMonth(String creationMonth) {
-        this.creationMonth = creationMonth;
-    }
-
     public String getCreationYear() {
         return creationYear;
     }
 
     public void setCreationYear(String creationYear) {
         this.creationYear = creationYear;
-    }
-
-    public String getAcquistionDate() {
-        return acquistionDate;
-    }
-
-    public void setAcquistionDate(String acquistionDate) {
-        this.acquistionDate = acquistionDate;
-    }
-
-    public String getAcquistionMonth() {
-        return acquistionMonth;
-    }
-
-    public void setAcquistionMonth(String acquistionMonth) {
-        this.acquistionMonth = acquistionMonth;
     }
 
     public String getAcquistionYear() {
@@ -265,18 +225,13 @@ public class Artwork {
 
     }
 
-    public Artwork(long id, String artName, String artCat, List<String> artCatList, String artistName, String artistInfo, String creationDate, String creationMonth, String creationYear, String acquistionDate, String acquistionMonth, String acquistionYear, String color, List<String> colorList, String medium, List<String> mediumList, String culture, List<String> cultureList, String brg, String category, List<String> categorylist, String displayImage, String imgLoc, String soundLoc, String description) {
+    public Artwork(long id, String artTitle, String artLoc, String artistName, String artistInfo, String creationYear, String acquistionYear, String color, List<String> colorList, String medium, List<String> mediumList, String culture, List<String> cultureList, String brg, String category, List<String> categorylist, String displayImage, String imgLoc, String soundLoc, String description) {
         this.id = id;
-        this.artName = artName;
-        this.artCat = artCat;
-        this.artCatList = artCatList;
+        this.artTitle = artTitle;
+        this.artLoc = artLoc;
         this.artistName = artistName;
         this.artistInfo = artistInfo;
-        this.creationDate = creationDate;
-        this.creationMonth = creationMonth;
         this.creationYear = creationYear;
-        this.acquistionDate = acquistionDate;
-        this.acquistionMonth = acquistionMonth;
         this.acquistionYear = acquistionYear;
         this.color = color;
         this.colorList = colorList;

@@ -19,16 +19,11 @@ public class ArtworkExcelExporter {
     private static final List<String> HEADERS = new ArrayList<>();
     static {
         HEADERS.add("ID");
-        HEADERS.add("ArtName");
-        HEADERS.add("ArtCat");
-        HEADERS.add("ArtCatList");
+        HEADERS.add("ArtTitle");
+        HEADERS.add("ArtLoc");
         HEADERS.add("ArtistName");
         HEADERS.add("ArtistInfo");
-        HEADERS.add("CreationDate");
-        HEADERS.add("CreationMonth");
         HEADERS.add("CreationYear");
-        HEADERS.add("AcquistionDate");
-        HEADERS.add("AcquistionMonth");
         HEADERS.add("AcquistionYear");
         HEADERS.add("Color");
         HEADERS.add("ColorList");
@@ -105,16 +100,11 @@ public class ArtworkExcelExporter {
             int columnCount = 0;
 
             createCell(row, columnCount++, artwork.getId(), style);
-            createCell(row, columnCount++, artwork.getArtName(), style);
-            createCell(row, columnCount++, artwork.getArtCat(), style);
-            createCell(row, columnCount++, artwork.getArtCat(), style);
+            createCell(row, columnCount++, artwork.getArtTitle(), style);
+            createCell(row, columnCount++, artwork.getArtLoc(), style);
             createCell(row, columnCount++, artwork.getArtistName(), style);
             createCell(row, columnCount++, artwork.getArtistInfo(), style);
-            createCell(row, columnCount++, artwork.getCreationDate(), style);
-            createCell(row, columnCount++, artwork.getCreationMonth(), style);
             createCell(row, columnCount++, artwork.getCreationYear(), style);
-            createCell(row, columnCount++, artwork.getAcquistionDate(), style);
-            createCell(row, columnCount++, artwork.getAcquistionMonth(), style);
             createCell(row, columnCount++, artwork.getAcquistionYear(), style);
             createCell(row, columnCount++, artwork.getColor(), style);
             createCell(row, columnCount++, artwork.getColorList(), style);
